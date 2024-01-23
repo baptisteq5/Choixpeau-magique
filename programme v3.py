@@ -62,11 +62,13 @@ def distancekppv(poudlard_characters, courage, ambition, intelligence, good):
         prenom["Distance"] = distance
 
     poudlard_characters.sort(key=lambda x: x["Distance"] )
+    del poudlard_characters[5:]
     return poudlard_characters
     
     
-poudlard_characters, characteristics_tab = fusion_import_perso()   
-poudlard_characters = distancekppv(poudlard_characters, 8, 4, 7, 10)
+
+
+
 
 def resultat_kppv_maisons(poudlard_characters):
     table_dico_maisons = [{"House" : "Gryffindor", "Character"  : 0}, 
@@ -74,29 +76,35 @@ def resultat_kppv_maisons(poudlard_characters):
                           {"House" : "Hufflepuff", "Character" : 0},
                           {"House" : "Ravenclaw", "Character" : 0 }]
 
-    for name in poudlard_characters[:5]:
-        if name["House"] == "Gryffindor":
-            table_dico_maisons[0["Character"]] += 1
+    for name in poudlard_characters:
+        if name['House'] == 'Gryffindor':
+            table_dico_maisons[0]['Character'] += 1
         elif name["House"] == "Slytherin":
-            table_dico_maisons[1["Character"]] += 1
+            table_dico_maisons[1]["Character"] += 1
         elif name["House"] == "Hufflepuff":
-            table_dico_maisons[2["Character"]] += 1
+            table_dico_maisons[2]["Character"] += 1
         elif name["House"] == "Ravenclaw":
-            table_dico_maisons[3["Character"]] += 1
+            table_dico_maisons[3]["Character"] += 1
             
-    table_dico_maisons.sort(key=lambda x : x["Character"], reverse=True)      
+    table_dico_maisons.sort(key=lambda x : x["Character"], reverse=True)
             
     return table_dico_maisons
         
-print(resultat_kppv_maisons(poudlard_characters))
-
 
 
 #def affichage_maison():
     
-    
-    
-    
-    
-    
 
+def ihm():
+    poudlard_characters, characteristics_tab = fusion_import_perso()
+    profils = [[9, 2, 8, 9],
+               [6, 7, 9, 7],
+               [3, 8, 6, 3],
+               [2, 3, 7, 8],
+               [3, 4, 8, 8]]
+    for i in profils:
+        poudlard_characters = distancekppv(poudlard_characters, profils[i][0], profils[i][1], profils[i][2], profils[i][3])
+        print(resultat_kppv_maisons(poudlard_characters))
+        
+
+print(ihm())
