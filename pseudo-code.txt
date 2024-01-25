@@ -1,0 +1,34 @@
+PSEUDO-CODE :
+
+FONCTION fusion_import_perso():
+	importer les tables "Characters.csv" et "Caracteristiques_des_persos.csv"
+	fusionner les deux tables
+
+FONCTION distance_kppv():
+	POUR prenom DANS poudlard_characters:
+		distance = ((courage - courage_perso)**2 + 
+                    	    (ambition - ambition_perso)**2 +
+                    	    (intelligence - intelligence_perso)**2 +
+                    	    (good - good_perso)**2)**0.5
+	trier la liste selon leur distance au perso de référence et 
+	ne garder que les 5 premiers
+
+
+
+FONCTION resultats_kppv_maisons(poudlard_characters):
+	table_dico_maison <= [{"House" : "Gryffindor", "Character"  : 0}, 
+                              {"House" : "Slytherin", "Character" : 0},
+                              {"House" : "Hufflepuff", "Character" : 0},
+                              {"House" : "Ravenclaw", "Character" : 0 }]
+	
+	POUR nom DANS poudlard_characters: 
+		SI name['House'] = "Griffindor":
+			table_dico_maisons[0]["Characters"] <= table_dico_maisons[0]["Characters"] + 1
+		SI name['House'] = "Slytherin":
+			table_dico_maisons[1]["Characters"] <= table_dico_maisons[0]["Characters"] + 1
+		SI name['House'] = "Hufflepuff":
+			table_dico_maisons[2]["Characters"] <= table_dico_maisons[0]["Characters"] + 1
+		SI name['House'] = "Ravenclaw":
+			table_dico_maisons[3]["Characters"] <= table_dico_maisons[0]["Characters"] + 1
+
+	trier table_dico_maison
