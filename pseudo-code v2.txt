@@ -1,0 +1,25 @@
+PSEUDO-CODE :
+
+FONCTION distance_kppv():
+	POUR prenom DANS poudlard_characters:
+		distance <- calcul de la distance de chaque personnage par rapport à ses caractéristiques
+		poudlard_characters <- trie de la liste des personnages selon leur distance au personnage de référence et ne garder que les 5 premiers
+
+
+
+FONCTION resultats_kppv_maisons(poudlard_characters):
+	
+	POUR nom DANS poudlard_characters: 
+		SI le nom de la maison est Gryffindor :
+			table_dico_maisons Gryffindor <- +1
+
+		SI le nom de la maison est Slytherin :
+			table_dico_maisons Slytherin <- +1
+
+		SI le nom de la maison est Hufflepuff :
+			table_dico_maisons Hufflepuff <- +1
+
+		SI le nom de la maison est Ravenclaw :
+			table_dico_maisons Ravenclaw <- +1
+
+	trier table_dico_maison
