@@ -117,35 +117,43 @@ les_profiles_de_la_consigne = [{'Courage' : 9, 'Ambition' : 2, 'Intelligence' : 
 valeur_list = ('Courage', 'Ambition', 'Intelligence', 'Good')
 def ihm_kppv(list_de_dico):
     
-    
-    for persos in list_de_dico:
-        poudlard_characters = fusion_import_perso()   
-        poudlard_characters = distancekppv(poudlard_characters, persos['Courage'], persos['Ambition'], persos['Intelligence'], persos['Good'])    
-        compteur_par_maisons = resultat_kppv_maisons(poudlard_characters)
-        affichage_maison(compteur_par_maisons, poudlard_characters, persos)
-                
+    start = input("Vous pouvez tester les kppv des profiles de la consigne(1), un autre(2) ou partir(autre chose)") 
+    while start == '1' or start == '2':
+        if start == '1':
+            
+            for persos in list_de_dico:
+                poudlard_characters = fusion_import_perso()   
+                poudlard_characters = distancekppv(poudlard_characters, persos['Courage'], persos['Ambition'], persos['Intelligence'], persos['Good'])    
+                compteur_par_maisons = resultat_kppv_maisons(poudlard_characters)
+                affichage_maison(compteur_par_maisons, poudlard_characters, persos)
+            start = input("Vous pouvez tester les kppv des profiles de la consigne(1), un autre(2) ou partir(autre chose)")
                
-"""
-start = input("Vous pouvez tester les kppv"
-              "des profiles de la consigne(1)")               
- un autre(2)\
- ou partir(autre chose)")    
+   
         else:
-            list_new_profile = []
+            dico_new_profile = {}
             for caractéristiques in valeur_list:
-                list_new_profile.append(int(input("Veullez entrez la valeur de {caractéristiques} que vous désirez pour votre profile : ")))
-            print(f"m")
-            start = input("Vous pouvez tester les kppv\
- des profiles de la consigne(1)\
- un autre profile (création)(2)\
- ou partir(autre chose)")
-   print("Fin du programme")
-""" 
+                dico_new_profile[caractéristiques] = int(input(f"Veullez entrez la valeur de {caractéristiques} que vous désirez pour votre profile entre 1 et 9:"))
+                if dico_new_profile[caractéristiques] > 9:
+                    dico_new_profile[caractéristiques] = 9
+                elif dico_new_profile[caractéristiques] < 1:
+                    dico_new_profile[caractéristiques] = 1
+            print(dico_new_profile)   
+            for test in dico_new_profile:
+                poudlard_characters = fusion_import_perso()   
+                poudlard_characters = distancekppv(poudlard_characters, test['Courage'], test['Ambition'], test['Intelligence'], test['Good'])    
+                compteur_par_maisons = resultat_kppv_maisons(poudlard_characters)
+                affichage_maison(compteur_par_maisons, poudlard_characters, test)
+            print(f"{dico_new_profile}")
+            start = input("Vous pouvez tester les kppv des profiles de la consigne(1), un autre(2) ou partir(autre chose)")
+
+    print("Fin du programme")
+ 
 
 ihm_kppv(les_profiles_de_la_consigne)
 
 
- 
+
+
 
 
 
