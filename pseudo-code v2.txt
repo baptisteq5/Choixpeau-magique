@@ -1,9 +1,12 @@
 PSEUDO-CODE :
 
-FONCTION distance_kppv():
-	POUR prenom DANS poudlard_characters:
-		distance <- calcul de la distance de chaque personnage par rapport à ses caractéristiques
-		poudlard_characters <- trie de la liste des personnages selon leur distance au personnage de référence et ne garder que les 5 premiers
+Variables : 
+
+
+
+POUR prenom DANS poudlard_characters:
+	distance <- calcul de la distance de chaque personnage par rapport à ses caractéristiques
+	poudlard_characters <- trie de la liste des personnages selon leur distance au personnage de référence et ne garder que les 5 premiers
 
 
 
