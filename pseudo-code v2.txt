@@ -7,7 +7,7 @@ valeur_voisins : un entier
 
 DEBUT
 
-poudlard_characters <- résultat de la fonction distancekppv qui ajoute la distance de 			chaque perso de poudlard avec le personnage cible
+poudlard_characters <- résultat de la fonction distancekppv qui ajoute la distance de chaque perso de poudlard avec le personnage cible
 table_compteur_maison <- initialisation du compteur de chaque maison a 0
 valeur_voisins <- 5
 
