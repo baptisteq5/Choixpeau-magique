@@ -1,28 +1,40 @@
 PSEUDO-CODE :
 
 Variables : 
+poudlard_characters : une table de dictionnaire 
+table_compteur_maison : une table de dictionnaire
+valeur_voisins : un entier
 
+DEBUT
 
+poudlard_characters <- résultat de la fonction distancekppv qui ajoute la distance de 			chaque perso de poudlard avec le personnage cible
+table_compteur_maison <- initialisation du compteur de chaque maison a 0
+valeur_voisins <- 5
 
-POUR prenom DANS poudlard_characters:
-	distance <- calcul de la distance de chaque personnage par rapport à ses caractéristiques
-	poudlard_characters <- trie de la liste des personnages selon leur distance au personnage de référence et ne garder que les 5 premiers
+TANT_QUE la valeur de table_compteur_maison[compteur de la premiere maison] est égale à la valeur de table_compteur_maison[compteur de la deuxieme maison]:
 
+	table_compteur_maison <- initialisation du compteur de chaque maison a 0
 
-
-FONCTION resultats_kppv_maisons(poudlard_characters):
-	
 	POUR nom DANS poudlard_characters: 
-		SI le nom de la maison est Gryffindor :
-			table_dico_maisons Gryffindor <- +1
+			SI le nom de la maison est Gryffindor :
+				table_dico_maisons[Gryffindor] <- +1
+	
+			SINON le nom de la maison est Slytherin :
+				table_dico_maisons[Slytherin] <- +1
+	
+			SINON le nom de la maison est Hufflepuff :
+				table_dico_maisons[Hufflepuff] <- +1
+	
+			SINON le nom de la maison est Ravenclaw :
+				table_dico_maisons[Ravenclaw] <- +1
+	FIN POUR
+	trier table_compteur_maison
+	valeur_voisins <- +1
 
-		SI le nom de la maison est Slytherin :
-			table_dico_maisons Slytherin <- +1
+FIN TANT_QUE
+supprimer elements poudlard_characters de valeur_voisins - 1 à fin
 
-		SI le nom de la maison est Hufflepuff :
-			table_dico_maisons Hufflepuff <- +1
+FIN
 
-		SI le nom de la maison est Ravenclaw :
-			table_dico_maisons Ravenclaw <- +1
-
-	trier table_dico_maison
+	
+	
