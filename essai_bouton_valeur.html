@@ -1,0 +1,199 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js">
+    </script>
+</head>
+
+<body onload="brython()">
+
+    <script type="text/python">
+        from browser import document, html
+        
+        def fusion_import_perso():
+            # ouverture du permier fichier
+            with open("Characters.csv", mode='r', encoding='utf-8') as f:
+                reader = csv.DictReader(f, delimiter=';')
+                characters_tab = [{key : value.replace('\xa0', ' ')
+                                for key, value in element.items()} for element in 
+                                reader]
+            # ouverture du second fichier
+            with open("Caracteristiques_des_persos.csv", mode='r', encoding='utf-8') as f:
+                reader = csv.DictReader(f, delimiter=';')
+                characteristics_tab = [{key : value for key, value in element.items()} 
+                                    for element in reader]
+
+            poudlard_characters = []
+            
+            # fusion des deux table dans une nouvelle table : poudlard_characters
+            for poudlard_character in characteristics_tab:
+                for kaggle_character in characters_tab:
+                    if poudlard_character['Name'] == kaggle_character['Name']:
+                        poudlard_character.update(kaggle_character)
+                        poudlard_characters.append(poudlard_character)
+            
+        return poudlard_characters
+
+
+        def distancekppv(poudlard_characters, courage, ambition, intelligence, good):
+            
+            for prenom in poudlard_characters:
+                
+                # changer les caractéristiques des personnages en entiers
+                courage_perso = int(prenom["Courage"])
+                ambition_perso = int(prenom["Ambition"])
+                intelligence_perso = int(prenom["Intelligence"])
+                good_perso = int(prenom["Good"])
+                # calcul de la distance avec le voisin
+                distance = ((courage - courage_perso)**2 + 
+                            (ambition - ambition_perso)**2 +
+                            (intelligence - intelligence_perso)**2 +
+                            (good - good_perso)**2)**0.5
+                
+                
+                prenom["Distance"] = distance
+        
+            poudlard_characters.sort(key=lambda x: x["Distance"])
+        
+        return poudlard_characters
+
+
+        def resultat_kppv_maisons(poudlard_characters):
+            """
+            Comptage du nombre de voisins dans chaque maison pour savoir laquelle est 
+            majoritaire. 
+            
+            Entrée : un table de dictionnaire avec les 5 plus proches voisins du nouveau
+            personnage
+            
+            Sortie : une table de dictionnaire contenant le nombre de personnage(s) de 
+            chaque maison
+            
+            """
+            table_compteur_maison = [{"House" : "Gryffindor", "Character"  : 0}, 
+                                {"House" : "Slytherin", "Character" : 0},
+                                {"House" : "Hufflepuff", "Character" : 0},
+                                {"House" : "Ravenclaw", "Character" : 0 }]
+            valeur_voisins = 5
+            
+            while table_compteur_maison[0]["Character"] == table_compteur_maison[1]["Character"]: 
+                table_compteur_maison = [{"House" : "Gryffindor", "Character"  : 0}, 
+                                    {"House" : "Slytherin", "Character" : 0},
+                                    {"House" : "Hufflepuff", "Character" : 0},
+                                    {"House" : "Ravenclaw", "Character" : 0 }]
+                
+                for name in poudlard_characters[:valeur_voisins]:
+                    if name["House"] == "Gryffindor":
+                        table_compteur_maison[0]["Character"] += 1
+                    elif name["House"] == "Slytherin":
+                        table_compteur_maison[1]["Character"] += 1
+                    elif name["House"] == "Hufflepuff":
+                        table_compteur_maison[2]["Character"] += 1
+                    elif name["House"] == "Ravenclaw":
+                        table_compteur_maison[3]["Character"] += 1
+                        
+                table_compteur_maison.sort(key=lambda x : x["Character"], reverse=True) 
+                valeur_voisins += 1
+            del poudlard_characters[valeur_voisins - 1:]      
+        
+        return table_compteur_maison, poudlard_characters
+
+
+        def affichage_maison(compteur_par_maisons, poudlard_characters_reduit,
+                     caracteristiques_inconnu):
+
+            print("Le personnage inconnu ayant les caractéristiques "
+                f"{caracteristiques_inconnu} est le plus proches de ces autres " 
+                "personnages :\n")
+            
+            for character in poudlard_characters_reduit:
+                print(f'{character["Name"]} de la maison {character["House"]}, '
+                    f'distance : {character["Distance"]}')
+                    
+                    
+            print("\nLa maison qui lui correspond le mieux est donc : " 
+                f"{compteur_par_maisons[0]['House']} !\n\n")
+
+
+        def ihm_kppv2(new_profil):
+            '''
+            Execute les fonctions pour permettre le bon déroulement de l'affichage dans 
+            la console
+            
+            Entrée : une table de dictionnaires qui contient le profil crée à 
+            tester
+            
+            Sortie: l'execution des fonctions
+            '''
+            poudlard_characters = fusion_import_perso()   
+            poudlard_characters = distancekppv(poudlard_characters,
+                                                new_profil['Courage'], new_profil['Ambition'],
+                                                new_profil['Intelligence'], new_profil['Good']) 
+            compteur_par_maisons, poudlard_characters_reduit = resultat_kppv_maisons(poudlard_characters)
+            affichage_maison(compteur_par_maisons, poudlard_characters_reduit, new_profil)
+
+
+        list_new_profil = {'Courage' : 0, 'Ambition' : 0, 'Intelligence' : 0, 'Good' : 0}
+
+
+
+        def click_courage(ev):
+            document[""]
+
+
+    </script>
+
+<p></p>
+ quelle valeur de courage ?
+    <button name="button" id="bouton0.1">1</button>
+    <button name="button" id="bouton0.2">2</button>
+    <button name="button" id="bouton0.3">3</button>
+    <button name="button" id="bouton0.4">4</button>
+    <button name="button" id="bouton0.5">5</button>
+    <button name="button" id="bouton0.6">6</button>
+    <button name="button" id="bouton0.7">7</button>
+    <button name="button" id="bouton0.8">8</button>
+    <button name="button" id="bouton0.9">9</button>
+
+quelle valeur de ambition ?
+    <button name="button" id="bouton1.1">1</button>
+    <button name="button" id="bouton1.2">2</button>
+    <button name="button" id="bouton1.3">3</button>
+    <button name="button" id="bouton1.4">4</button>
+    <button name="button" id="bouton1.5">5</button>
+    <button name="button" id="bouton1.6">6</button>
+    <button name="button" id="bouton1.7">7</button>
+    <button name="button" id="bouton1.8">8</button>
+    <button name="button" id="bouton1.9">9</button>
+
+quelle valeur de intelligence ?
+    <button name="button" id="bouton2.1">1</button>
+    <button name="button" id="bouton2.2">2</button>
+    <button name="button" id="bouton2.3">3</button>
+    <button name="button" id="bouton2.4">4</button>
+    <button name="button" id="bouton2.5">5</button>
+    <button name="button" id="bouton2.6">6</button>
+    <button name="button" id="bouton2.7">7</button>
+    <button name="button" id="bouton2.8">8</button>
+    <button name="button" id="bouton2.9">9</button>
+
+quelle valeur de good ?
+    <button name="button" id="bouton3.1">1</button>
+    <button name="button" id="bouton3.2">2</button>
+    <button name="button" id="bouton3.3">3</button>
+    <button name="button" id="bouton3.4">4</button>
+    <button name="button" id="bouton3.5">5</button>
+    <button name="button" id="bouton3.6">6</button>
+    <button name="button" id="bouton3.7">7</button>
+    <button name="button" id="bouton3.8">8</button>
+    <button name="button" id="bouton3.9">9</button>
+<p></p>
+</body>
+
+</html>
