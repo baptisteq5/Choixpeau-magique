@@ -25,27 +25,42 @@ def change_texte(ev):
         print("vous avez clique bouton 1.")
         liste_valeur = []
         a = 0
-        for str in table_questions[i]["profil"].split(","):
+        for str in table_questions[i]["Profil 1"].split(","):
             chiffre = int(str)
             liste_valeur.append(chiffre)
         for element in profil:
             profil[element] += liste_valeur[a]
             a += 1 
         print(profil)
-      
-            
-         
-           
-        
-            
-        
+    elif ev.target.id == "bouton2":
+        print("vous avez clique bouton 2.")
+        liste_valeur = []
+        a = 0
+        for str in table_questions[i]["Profil 2"].split(","):
+            chiffre = int(str)
+            liste_valeur.append(chiffre)
+        for element in profil:
+            profil[element] += liste_valeur[a]
+            a += 1 
+        print(profil) 
+    elif ev.target.id == "bouton3":
+        print("vous avez clique bouton 1.")
+        liste_valeur = []
+        a = 0
+        for str in table_questions[i]["Profil 3"].split(","):
+            chiffre = int(str)
+            liste_valeur.append(chiffre)
+        for element in profil:
+            profil[element] += liste_valeur[a]
+            a += 1 
+        print(profil)        
     i += 1
     
     
     
         
 
-profil = {'Courage' : 0, 'Ambition' : 0, 'Intelligence' : 0, 'Good' : 0}
+profil = {'Courage' : 5, 'Ambition' : 5, 'Intelligence' : 5, 'Good' : 5}
 print(profil)
 
 document["bouton1"].bind("click", change_texte)
