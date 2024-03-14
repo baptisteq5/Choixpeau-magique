@@ -17,10 +17,7 @@ print(table_questions)
 i = 0
 def change_texte(ev):
     global i, profil, table_questions
-    document["bouton1"].textContent = table_questions[i]["Reponse 1"]
-    document["bouton2"].textContent = table_questions[i]["Reponse 2"]
-    document["bouton3"].textContent = table_questions[i]["Reponse 3"]
-    document["zone_question"].textContent = table_questions[i]["Question"]
+    
     if ev.target.id == "bouton1":
         print("vous avez clique bouton 1.")
         liste_valeur = []
@@ -32,6 +29,7 @@ def change_texte(ev):
             profil[element] += liste_valeur[a]
             a += 1 
         print(profil)
+        i += 1
     elif ev.target.id == "bouton2":
         print("vous avez clique bouton 2.")
         liste_valeur = []
@@ -42,7 +40,8 @@ def change_texte(ev):
         for element in profil:
             profil[element] += liste_valeur[a]
             a += 1 
-        print(profil) 
+        print(profil)
+        i += 1
     elif ev.target.id == "bouton3":
         print("vous avez clique bouton 3.")
         liste_valeur = []
@@ -53,10 +52,13 @@ def change_texte(ev):
         for element in profil:
             profil[element] += liste_valeur[a]
             a += 1 
-        print(profil)     
-    elif ev.target.id == "bouton0":
-        i = -1
-    i += 1
+        print(profil)
+        i += 1
+    document["bouton1"].textContent = table_questions[i]["Reponse 1"]
+    document["bouton2"].textContent = table_questions[i]["Reponse 2"]
+    document["bouton3"].textContent = table_questions[i]["Reponse 3"]
+    document["zone_question"].textContent = table_questions[i]["Question"]
+    
     
     
     
