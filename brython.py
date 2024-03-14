@@ -13,7 +13,7 @@ with open("questions du questionnaire choipeau-magique Pt2.csv", mode='r', encod
             dico[keys[i]] = values[i]
         table_questions.append(dico)
   
-
+print(table_questions)
 i = 0
 def change_texte(ev):
     global i, profil, table_questions
@@ -44,7 +44,7 @@ def change_texte(ev):
             a += 1 
         print(profil) 
     elif ev.target.id == "bouton3":
-        print("vous avez clique bouton 1.")
+        print("vous avez clique bouton 3.")
         liste_valeur = []
         a = 0
         for str in table_questions[i]["Profil 3"].split(","):
@@ -53,7 +53,9 @@ def change_texte(ev):
         for element in profil:
             profil[element] += liste_valeur[a]
             a += 1 
-        print(profil)        
+        print(profil)     
+    elif ev.target.id == "bouton0":
+        i = -1
     i += 1
     
     
@@ -63,6 +65,7 @@ def change_texte(ev):
 profil = {'Courage' : 5, 'Ambition' : 5, 'Intelligence' : 5, 'Good' : 5}
 print(profil)
 
+document["bouton0"].bind("click", change_texte)
 document["bouton1"].bind("click", change_texte)
 document["bouton2"].bind("click", change_texte)
 document["bouton3"].bind("click", change_texte)
