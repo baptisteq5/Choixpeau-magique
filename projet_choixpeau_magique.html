@@ -10,28 +10,69 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
 
+    <style>
+        body {
+            font-family: 'Baskerville Old Face', sans-serif;
+        }
+        
+        h1 { 
+            color: #740001;
+            margin-left: 10%;
+            margin-right: auto;
+        }
+
+        h3 {
+            margin-left: 1em;
+            margin-right: auto;
+        }
+
+        p {
+            margin-left: 10%;
+            margin-right: auto;
+        }
+
+        button {
+            margin-left: 10%;
+            margin-right: auto;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: 15%;
+            float: right;
+        }
+    </style>
+
 </head>
 <body onload="brython(1)">
     <script type="text/python" src="brython.py">
     </script> 
-   <section>
-        <h1>Bienvenue sur le test de maison poudlard !</h1>
-   </section>
-   <h3> Découvre la maison qui te correspond le mieux en fonction de 
-    tes reponses à ces quelques mise en situations
+
+    <img src="https://www.pause-canap.com/media/wysiwyg/blason-maison-harry-potter.jpg" alt="maisons" style="width:20%">
+
+   <header>
+        <h1>A quelle maison de Poudlard appartient-tu ?</h1>
+   </header>
+
+   <h3> Réponds aux questions et découvre la maison qui te correspond le mieux parmi : 
+    Gryffondor, Poufsouffle, Serdaigle, Serpentard
    </h3>
     <br/> 
-    
+    <p>
         Bon voyage dans le monde magique de l'école des sorciers...
         <br/>
-
+        <br/>
         <button name="bouton" id="bouton0" class="bouton_demarage">Démarrer le quizz</button>
 
         <p id="zone_question">Voici la zone avec les questions</p>
         
-        <button name="bouton" id="bouton1" class="bouton_reponse">Réponse 1</button>
-        <button name="bouton" id="bouton2" class="bouton_reponse">Réponse 2</button>
+        <button name="bouton" id="bouton1" class="bouton_reponse">Réponse 1</button><br/>
+        <br/>
+        <button name="bouton" id="bouton2" class="bouton_reponse">Réponse 2</button><br/>
+        <br/>
         <button name="bouton" id="bouton3" class="bouton_reponse">Réponse 3</button>
    
+    </p>
 </body>
 </html>
