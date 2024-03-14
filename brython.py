@@ -1,9 +1,10 @@
+# coding : utf-8
 from browser import document, html
 import csv
 
 
 table_questions = []
-with open("questions du questionnaire choipeau-magique Pt2.csv", mode='r', encoding='utf-8') as f:
+with open("questionnaire final.csv", mode='r', encoding='utf-8') as f:
     lines = f.readlines()
     key_line = lines[0].strip()
     keys = key_line.split(";")
@@ -14,13 +15,12 @@ with open("questions du questionnaire choipeau-magique Pt2.csv", mode='r', encod
         for i in range(len(keys)):
             dico[keys[i]] = values[i]
         table_questions.append(dico)
-  
+
 print(table_questions)
 
 
 def change_texte(ev):
     global i, profil, table_questions
-    
     if ev.target.id == "bouton1":
         print("vous avez clique bouton 1.")
         liste_valeur = []
@@ -62,16 +62,18 @@ def change_texte(ev):
     document["bouton2"].textContent = table_questions[i]["Reponse 2"]
     document["bouton3"].textContent = table_questions[i]["Reponse 3"]
     document["zone_question"].textContent = table_questions[i]["Question"]
-    if i == 7:
+    if i == 13:
         page_resultat(profil)
-
 
 def page_resultat(profil): 
     document["bouton1"].style.display = "None"
     document["bouton2"].style.display = "None"
     document["bouton3"].style.display = "None"
     document["bouton0"].style.display = "None"
-    document["texte démarrage"].style.display = "None"
+    document["texte_1"].style.display = "None"
+    document["texte_2"].style.display = "None"
+    document["texte_3"].style.display = "None"
+    document["zone_question"].style.display = "None"
     ihm_kppv(profil)
 
 
@@ -198,14 +200,13 @@ def affichage_maison(compteur_par_maisons, poudlard_characters_reduit):
     Sortie : un affichage dans la console des voisins et de la maison dont laquelle
     le nouveau personnage est le plus proche.
     """
+    print(compteur_par_maisons[0]['House'])
+    document <= html.H1(f"La maison qui vous correspond le mieux est : {compteur_par_maisons[0]['House']}",) 
 
-    document <= html.H1("La maison qui vous correspond le mieux est : ") 
-    (f"{compteur_par_maisons[0]['House']} !\n\n")
-
-    document <= html.H2("Vos plus proches voisins sont :\n")
+    document <= html.H4("Vos plus proches voisins sont :\n")
     for character in poudlard_characters_reduit:
-        document <= html.P(f'{character["Name"]} de la maison {character["House"]}, ')
-        (f'distance : {character["Distance"]}')
+        document <= html.P(f"{character["Name"]} de la maison {character["House"]}")
+        (f"distance : {character["Distance"]}")
             
             
     
